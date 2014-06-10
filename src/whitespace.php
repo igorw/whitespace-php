@@ -16,12 +16,12 @@ namespace igorw\whitespace;
 function parse(array $input) {
     $instructions = [
         // stack
-        ["  ", 'push', 'num'],
+        ["  ", 'push', 'signed'],
         [" \n ", 'dup', null],
-        [" \t ", 'copy', 'num'],
+        [" \t ", 'copy', 'signed'],
         [" \n\t", 'swap', null],
         [" \n\n", 'drop', null],
-        [" \t\n", 'slide', 'num'],
+        [" \t\n", 'slide', 'signed'],
 
         // arithmetic
         ["\t   ", 'add', null],
@@ -35,11 +35,11 @@ function parse(array $input) {
         ["\t\t\t", 'retrieve', null],
 
         // flow
-        ["\n  ", 'label', 'label'],
-        ["\n \t", 'call', 'label'],
-        ["\n \n", 'jump', 'label'],
-        ["\n\t ", 'jumpz', 'label'],
-        ["\n\t\t", 'jumplz', 'label'],
+        ["\n  ", 'label', 'unsigned'],
+        ["\n \t", 'call', 'unsigned'],
+        ["\n \n", 'jump', 'unsigned'],
+        ["\n\t ", 'jumpz', 'unsigned'],
+        ["\n\t\t", 'jumplz', 'unsigned'],
         ["\n\t\n", 'ret', null],
         ["\n\n\n", 'exit', null],
 
@@ -68,7 +68,7 @@ function parse(array $input) {
         $input = array_slice($input, strlen($prefix));
 
         $parsed_arg = null;
-        if ($arg) {
+        if ($arg === 'signed') {
             // space = positive, tab = negative
             $sign = array_shift($input) === ' ' ? 1 : -1;
             $digits = '';
@@ -76,8 +76,14 @@ function parse(array $input) {
                 // space = 0, tab = 1, \n separates
                 $digits .= ($char === ' ') ? '0' : '1';
             }
-            $parsed_num = $sign * base_convert($digits, 2, 10);
-            $parsed_arg = ($arg === 'label') ? chr($parsed_num) : $parsed_num;
+            $parsed_arg = $sign * base_convert($digits, 2, 10);
+        } else if ($arg === 'unsigned') {
+            $digits = '';
+            while ("\n" !== $char = array_shift($input)) {
+                // space = 0, tab = 1, \n separates
+                $digits .= ($char === ' ') ? '0' : '1';
+            }
+            $parsed_arg = base_convert($digits, 2, 10);
         }
 
         $code[] = [$inst, $parsed_arg];
