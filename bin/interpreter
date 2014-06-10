@@ -16,7 +16,7 @@ $filename = $argv[1];
 $input = str_split(preg_replace('/[^\\t\\n ]/', '', file_get_contents($filename)));
 
 $options = [
-    'debug' => true,
+    // 'debug' => true,
 ];
 
 w\evaluate(w\parse($input), $options);
