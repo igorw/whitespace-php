@@ -1,6 +1,6 @@
 <?php
 
-require 'src/whitespace.php';
+require __DIR__.'/../src/whitespace.php';
 
 use igorw\whitespace as w;
 

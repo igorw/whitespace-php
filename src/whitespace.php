@@ -4,6 +4,8 @@ namespace igorw\whitespace;
 
 // whitespace is a dependently spaced lanuage
 // created by edwin brady and chris morris in 2003
+//
+// http://compsoc.dur.ac.uk/whitespace/
 
 // in order to allow consuming single chars,
 // make sure to run with:
@@ -59,7 +61,7 @@ function parse(array $input) {
         }
 
         if (!$matched) {
-            throw new \InvalidArgumentException('Could not find corresponding instruction.');
+            throw new \InvalidArgumentException("Could not find corresponding instruction for input ".json_encode($input).".");
         }
 
         list($prefix, $inst, $arg) = $matched;
@@ -83,21 +85,32 @@ function parse(array $input) {
     return $code;
 }
 
-function evaluate(array $code) {
+function evaluate(array $code, $options = []) {
     $labels = [];
     foreach ($code as $i => list($inst, $arg)) {
-        if ($inst === 'label') {
+        // disallow duplicate labels -- pick first match
+        if ($inst === 'label' && !isset($labels[$arg])) {
             $labels[$arg] = $i;
         }
     }
 
     $ip = 0;
     $stack = new \SplStack();
+    $calls = new \SplStack();
     $heap = [];
 
     $running = true;
     while ($running) {
         list($inst, $arg) = $code[$ip++];
+
+        if (isset($options['debug']) && $options['debug']) {
+            echo 'inst: '.json_encode([$inst, $arg])."\n";
+            echo 'stack: '.json_encode(array_reverse(array_values(iterator_to_array($stack))))."\n";
+            echo 'heap: '.json_encode($heap)."\n";
+            echo 'calls: '.json_encode(array_reverse(array_values(iterator_to_array($calls))))."\n";
+            echo "---\n";
+        }
+
         switch ($inst) {
             case 'push':
                 $stack->push($arg);
@@ -150,8 +163,8 @@ function evaluate(array $code) {
                 $stack->push($a % $b);
                 break;
             case 'store':
-                $addr = $stack->pop();
                 $value = $stack->pop();
+                $addr = $stack->pop();
                 $heap[$addr] = $value;
                 break;
             case 'retrieve':
@@ -162,7 +175,7 @@ function evaluate(array $code) {
                 // noop, labels are pre-processed
                 break;
             case 'call':
-                $stack->push($ip);
+                $calls->push($ip);
                 $ip = $labels[$arg];
                 break;
             case 'jump':
@@ -179,7 +192,7 @@ function evaluate(array $code) {
                 }
                 break;
             case 'ret':
-                $ip = $stack->pop();
+                $ip = $calls->pop();
                 break;
             case 'exit':
                 $running = false;
@@ -204,5 +217,5 @@ function evaluate(array $code) {
         }
     }
 
-    return iterator_to_array($stack);
+    return array_reverse(array_values(iterator_to_array($stack)));
 }
