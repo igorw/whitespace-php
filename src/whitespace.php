@@ -212,7 +212,7 @@ function evaluate(array $code, $options = []) {
             case 'read_char':
                 $addr = $stack->pop();
                 $char = fread(STDIN, 1);
-                $heap[$addr] = $char;
+                $heap[$addr] = ord($char);
                 break;
             case 'read_num':
                 $addr = $stack->pop();
