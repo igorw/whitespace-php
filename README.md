@@ -1,5 +1,7 @@
 # whitespace-php
 
+![logo](doc/decision.png)
+
 Don't you hate programming in PHP? Me too! Well luckily, now you don't have
 to!
 
