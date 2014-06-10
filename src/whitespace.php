@@ -204,12 +204,14 @@ function evaluate(array $code, $options = []) {
                 echo $stack->pop();
                 break;
             case 'read_char':
+                $addr = $stack->pop();
                 $char = fread(STDIN, 1);
-                $stack->push(ord($char));
+                $heap[$addr] = $char;
                 break;
             case 'read_num':
+                $addr = $stack->pop();
                 $num = (int) trim(fgets(STDIN));
-                $stack->push($num);
+                $heap[$addr] = $num;
                 break;
             default:
                 throw new \InvalidArgumentException("Instruction $inst not implemented.");
