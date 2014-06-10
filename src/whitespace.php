@@ -146,27 +146,27 @@ function evaluate(array $code, $options = []) {
             case 'add':
                 $b = $stack->pop();
                 $a = $stack->pop();
-                $stack->push($a + $b);
+                $stack->push(intval($a + $b));
                 break;
             case 'sub':
                 $b = $stack->pop();
                 $a = $stack->pop();
-                $stack->push($a - $b);
+                $stack->push(intval($a - $b));
                 break;
             case 'mul':
                 $b = $stack->pop();
                 $a = $stack->pop();
-                $stack->push($a * $b);
+                $stack->push(intval($a * $b));
                 break;
             case 'div':
                 $b = $stack->pop();
                 $a = $stack->pop();
-                $stack->push($a / $b);
+                $stack->push(intval($a / $b));
                 break;
             case 'mod':
                 $b = $stack->pop();
                 $a = $stack->pop();
-                $stack->push($a % $b);
+                $stack->push(intval($a % $b));
                 break;
             case 'store':
                 $value = $stack->pop();
