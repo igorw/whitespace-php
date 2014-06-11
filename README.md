@@ -20,3 +20,8 @@ used to indent your whitespace program!
 
 Ok, but does it support comments? Well sure as hell it does! Any character
 apart from newlines, tabs and spaces can be used to comment your program!
+
+## See also
+
+* [Whitespace](http://compsoc.dur.ac.uk/whitespace/index.php)
+* [Whitespace interpreters](https://github.com/hostilefork/whitespacers)
