@@ -34,7 +34,6 @@ whitespace interpreter (that is still written in whitespace), running in this
 whitespace interpreter (that is written in PHP).
 
     $ (cat examples/wsinterws.ws; cat examples/hworld.ws; echo -ne "\n\n\nquit\n\n\n") | hhvm bin/interpreter examples/wsinterws.ws
-    stty: standard input: Inappropriate ioctl for device
     whitespace interpreter written in whitespace
     made by oliver burghard smarty21@gmx.net
     in his free time for your and his joy
