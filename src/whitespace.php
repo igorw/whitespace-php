@@ -18,9 +18,9 @@ function parse(array $input) {
         // stack
         ["  ", 'push', 'signed'],
         [" \n ", 'dup', null],
-        [" \t ", 'copy', 'signed'],
+        [" \t ", 'ref', 'signed'],
         [" \n\t", 'swap', null],
-        [" \n\n", 'drop', null],
+        [" \n\n", 'discard', null],
         [" \t\n", 'slide', 'signed'],
 
         // arithmetic
@@ -124,7 +124,7 @@ function evaluate(array $code, $options = []) {
             case 'dup':
                 $stack->push($stack->top());
                 break;
-            case 'copy':
+            case 'ref':
                 $stack->push($stack[count($stack) - $arg]);
                 break;
             case 'swap':
@@ -133,7 +133,7 @@ function evaluate(array $code, $options = []) {
                 $stack->push($b);
                 $stack->push($a);
                 break;
-            case 'drop':
+            case 'discard':
                 $stack->pop();
                 break;
             case 'slide':
