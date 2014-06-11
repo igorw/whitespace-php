@@ -21,6 +21,40 @@ used to indent your whitespace program!
 Ok, but does it support comments? Well sure as hell it does! Any character
 apart from newlines, tabs and spaces can be used to comment your program!
 
+## What is whitespace?
+
+[Whitespace](http://compsoc.dur.ac.uk/whitespace/) is a dependently spaced
+lanuage created by Edwin Brady and Chris Morris in 2003.
+
+## Example run
+
+Here is a basic example of a basic hello world program, running inside a
+whitespace interpreter (that is written in whitespace), running again in that
+same whitespace interpreter (that is still written in whitespace), running in
+this whitespace interpreter (that is written in PHP):
+
+    $ (cat examples/wsinterws.ws; cat examples/hworld.ws; echo -ne "\n\n\nquit\n\n\n") | hhvm bin/interpreter examples/wsinterws.ws
+    stty: standard input: Inappropriate ioctl for device
+    whitespace interpreter written in whitespace
+    made by oliver burghard smarty21@gmx.net
+    in his free time for your and his joy
+    good time and join me to get whitespace ready for business
+    for any other information dial 1-900-whitespace
+    or get soon info at www.whitespace-wants-to-be-taken-serious.org
+    please enter the program and terminate via 3xenter,'quit',3xenter
+    -- ws interpreter ws -------------------------------------------
+    whitespace interpreter written in whitespace
+    made by oliver burghard smarty21@gmx.net
+    in his free time for your and his joy
+    good time and join me to get whitespace ready for business
+    for any other information dial 1-900-whitespace
+    or get soon info at www.whitespace-wants-to-be-taken-serious.org
+    please enter the program and terminate via 3xenter,'quit',3xenter
+    -- ws interpreter ws -------------------------------------------
+    Hello, world of spaces!
+
+Please note that running this particular example can take a while.
+
 ## See also
 
 * [Whitespace](http://compsoc.dur.ac.uk/whitespace/index.php)
