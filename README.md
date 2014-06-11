@@ -24,7 +24,7 @@ apart from newlines, tabs and spaces can be used to comment your program!
 ## What is whitespace?
 
 [Whitespace](http://compsoc.dur.ac.uk/whitespace/) is a dependently spaced
-lanuage created by Edwin Brady and Chris Morris in 2003.
+language created by Edwin Brady and Chris Morris in 2003.
 
 ## Example run
 
