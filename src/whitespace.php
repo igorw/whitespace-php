@@ -2,7 +2,7 @@
 
 namespace igorw\whitespace;
 
-// whitespace is a dependently spaced lanuage
+// whitespace is a dependently spaced language
 // created by edwin brady and chris morris in 2003
 //
 // http://compsoc.dur.ac.uk/whitespace/
