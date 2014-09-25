@@ -175,7 +175,7 @@ function evaluate(array $code, $options = []) {
                 break;
             case 'retrieve':
                 $addr = $stack->pop();
-                $stack->push($heap[$addr]);
+                $stack->push(isset($heap[$addr]) ? $heap[$addr] : 0);
                 break;
             case 'label':
                 // noop, labels are pre-processed
