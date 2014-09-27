@@ -54,6 +54,10 @@ whitespace interpreter (that is written in PHP).
 
 Please note that running this particular example can take a while.
 
+## TODO
+
+* Use BigInteger to properly support large labels
+
 ## See also
 
 * [Whitespace](http://compsoc.dur.ac.uk/whitespace/index.php)
